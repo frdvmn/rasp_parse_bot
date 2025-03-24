@@ -2,7 +2,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const iconv = require('iconv-lite')
 
-async function parseSchedule(url) {
+async function parseSchedule(url = '') {
 	try {
 		const response = await axios.get(url, {
 			responseType: 'arraybuffer',
@@ -96,7 +96,7 @@ async function parseSchedule(url) {
 	}
 }
 
-async function parseTeachers(url) {
+async function parseTeachers(url = '', teacher = '') {
 	try {
 		const response = await axios.get(url, {
 			responseType: 'arraybuffer',
@@ -115,16 +115,20 @@ async function parseTeachers(url) {
 			})
 		})
 
-		const inputName = 'семичев е.а'
-		const regex = new RegExp(inputName, 'i')
+		const regex = new RegExp(teacher, 'i')
 
-		teachers.filter(el => el['Преподаватель'].match(regex))
+		return teachers.filter(el => el['Преподаватель'].match(regex))
 	} catch (error) {
 		console.error(error)
 	}
 }
 
-const url = 'https://rasp.vgppk.ru/bp791.htm'
-const urlTeachers = 'https://rasp.vgppk.ru/bp.htm'
+// const url = 'https://rasp.vgppk.ru/bp791.htm'
+// const urlTeachers = 'https://rasp.vgppk.ru/bp.htm'
 // parseSchedule(url).then(data => console.log(data))
-parseTeachers(urlTeachers)
+// parseTeachers(urlTeachers, 'Семичев Е.А.').then(data => console.log(data))
+
+module.exports = {
+	parseTeachers,
+	parseSchedule,
+}
