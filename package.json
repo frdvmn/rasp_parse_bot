@@ -4,6 +4,7 @@
     "cheerio": "^1.0.0",
     "dotenv": "^16.4.7",
     "iconv-lite": "^0.6.3",
-    "node-telegram-bot-api": "^0.66.0"
+    "node-telegram-bot-api": "^0.66.0",
+    "sqlite3": "^5.1.7"
   }
 }
